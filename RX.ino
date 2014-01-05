@@ -1,5 +1,5 @@
 PROGMEM const byte rxPins[6] = {
-  RX_PIN_YAW, RX_PIN_ROLL, RX_PIN_PITCH, RX_PIN_AUX1, RX_PIN_AUX2, RX_PIN_THROTTLE};
+  RX_PIN_PITCH, RX_PIN_THROTTLE, RX_PIN_ROLL, RX_PIN_AUX1, RX_PIN_AUX2, RX_PIN_YAW};
 volatile byte rxState[4] = {0, 0, 0, 0};
 volatile int rxPrev[4] = {0, 0, 0, 0};
 
@@ -12,7 +12,7 @@ void rxInit() {
   PCMSK0 |= (1 << PCINT1)|(1 << PCINT2)|(1 << PCINT3)|(1 << PCINT4); 
   sei();
   attachInterrupt(RX_INT_AUX2,rxGoesHigh0,RISING);
-  attachInterrupt(RX_INT_THROTTLE,rxGoesHigh1,RISING);
+  attachInterrupt(RX_INT_YAW,rxGoesHigh1,RISING);
 }
 
 void rxGoesHigh0(){
@@ -25,11 +25,11 @@ void rxGoesLow0(){
 }
 
 void rxGoesHigh1(){
-  attachInterrupt(RX_INT_THROTTLE,rxGoesLow1,FALLING);
+  attachInterrupt(RX_INT_YAW,rxGoesLow1,FALLING);
   rxPrev[5]=micros();
 }
 void rxGoesLow1(){
-  attachInterrupt(RX_INT_THROTTLE,rxGoesHigh1,RISING);
+  attachInterrupt(RX_INT_YAW,rxGoesHigh1,RISING);
   rxVal[5]=micros()-rxPrev[5];  
 }
 
@@ -47,3 +47,4 @@ ISR(PCINT0_vect)
     }
   }
 }
+

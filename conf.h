@@ -39,28 +39,28 @@
 //---------------------------
 
 //.....RX Config............
-#define THROTTLE_RMIN  1104
-#define THROTTLE_RMAX  1892
+#define THROTTLE_RMIN  1130
+#define THROTTLE_RMAX  1800
 #define THROTTLE_WMIN  MOTOR_ARM_START
 #define THROTTLE_WMAX  MOTOR_MAX_LEVEL
 
-#define ROLL_RMIN  1040
-#define ROLL_RMAX  1976
+#define ROLL_RMIN  11104
+#define ROLL_RMAX  1896
 #define ROLL_WMIN  -15
 #define ROLL_WMAX  15
 
-#define PITCH_RMIN  1140
-#define PITCH_RMAX  1932
+#define PITCH_RMIN  1200
+#define PITCH_RMAX  1864
 #define PITCH_WMIN  -15
 #define PITCH_WMAX  15
 
-#define YAW_RMIN  1028
-#define YAW_RMAX  2004
+#define YAW_RMIN  1084
+#define YAW_RMAX  1844
 #define YAW_WMIN  -45
 #define YAW_WMAX  45
 
-#define RKNOB_RMIN  1008
-#define RKNOB_RMAX  2036
+#define RKNOB_RMIN  992
+#define RKNOB_RMAX  2016
 #define RKNOB_WMIN  -230
 #define RKNOB_WMAX  230
 
@@ -71,16 +71,17 @@
 
 #define RX_RATE_SENSITIVITY  3
 #define RX_ANGLE_DAMPNING  20.0  //D-term dampning
-#define RX_EXPO
+//#define RX_EXPO
 //..........................
 
 //----Debug Config---------
 #define DEBUG
 #define DEBUG_ANGLES
-#define DEBUG_GYRO
-#define DEBUG_PID
+//#define DEBUG_GYRO
+//#define DEBUG_PID
 #define DEBUG_RX
-#define DEBUG_SERIAL_CHART
+//#define DEBUG_SERIAL_CHART
+#define DEBUG_MOTOR
 
 //-------------------------
 
@@ -112,9 +113,9 @@
 
 //Motor Pins
 #define MOTOR0  6
-#define MOTOR1  10
-#define MOTOR2  5
-#define MOTOR3  9
+#define MOTOR1  9
+#define MOTOR2  10
+#define MOTOR3  11
 
 
 //*************************************
@@ -126,12 +127,13 @@
 //*************************************
 
 //.......RX PINS............
-#define RX_PIN_ROLL  16     //PCINT2
-#define RX_PIN_PITCH  14    //PCINT3
-#define RX_PIN_YAW  15      //PCINT1
-#define RX_PIN_THROTTLE  7  //INT6
+#define RX_PIN_YAW  0     //PCINT2
+#define RX_PIN_ROLL  15    //PCINT3
+#define RX_PIN_PITCH  14      //PCINT1
+#define RX_PIN_THROTTLE  16  //INT2
 #define RX_PIN_AUX1  8      //PCINT4
-#define RX_PIN_AUX2  0      //INT2
-#define RX_INT_AUX2  2
-#define RX_INT_THROTTLE 4
+#define RX_PIN_AUX2  7      //INT4
+#define RX_INT_AUX2  4
+#define RX_INT_YAW 2
 //........................
+

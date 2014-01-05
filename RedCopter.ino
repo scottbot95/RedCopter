@@ -27,20 +27,27 @@ void setup() {
 #ifdef DEBUG
   Serial.begin(115200);
   while(!Serial);
+  Serial.println("init");
 #endif
   MPU.init();
+  Serial.println("MPU");
   motorInit();
+  Serial.println("motor");
   ledsInit();
+  Serial.println("led");
   rxInit();
+  Serial.println("rx");
   motorArm();
+  Serial.println("motorarm");
   PIDInit();
+  Serial.println("pid");
   tPrev = millis();
 }
 
 void loop() {
   updateSensorVals();
   FlightControl();
-#ifdef DEBUG 
+#ifdef DEBUG
   debugProcess();
 #endif
 }

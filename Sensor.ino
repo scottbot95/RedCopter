@@ -77,3 +77,4 @@ void gyroMAF() { // Moving average filter
   gz_avg=(GYRO_HPF_NR*gz_old+(100.0-GYRO_HPF_NR)*gz_avg)/100.0;
 #endif
 }
+

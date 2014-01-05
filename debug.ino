@@ -1,4 +1,4 @@
-void debugProcess(){
+ void debugProcess(){
 #ifdef DEBUG_ANGLES
   Serial.print("XT:");
   Serial.print((float)(angles[0]));
@@ -27,13 +27,13 @@ void debugProcess(){
   Serial.print('\t');
 #endif
 #ifdef DEBUG_RX
-  Serial.print(F("Yaw:"));
+  Serial.print(F("Pitch:"));
   Serial.print(rxVal[0]);
   Serial.print('\t');
-  Serial.print(F("Roll:"));
+  Serial.print(F("Throttle:"));
   Serial.print(rxVal[1]);
   Serial.print('\t');
-  Serial.print(F("Pitch:"));
+  Serial.print(F("Roll:"));
   Serial.print(rxVal[2]);
   Serial.print('\t');
   Serial.print(F("AUX1:"));
@@ -42,7 +42,7 @@ void debugProcess(){
   Serial.print(F("AUX2:"));
   Serial.print(rxVal[4]);
   Serial.print('\t');  
-  Serial.print(F("Throttle:"));
+  Serial.print(F("Yaw:"));
   Serial.print(rxVal[5]);
   Serial.print('\t');    
 #endif
@@ -63,3 +63,4 @@ void debugProcess(){
   Serial.print('\n');
 
 }
+

@@ -1,12 +1,20 @@
-float gx_tmp[GYRO_MAF_NR] = {0.0, 0.0};
-float gy_tmp[GYRO_MAF_NR] = {0.0, 0.0};
-float gz_tmp[GYRO_MAF_NR] = {0.0, 0.0};
+float gx_tmp[GYRO_MAF_NR];
+float gy_tmp[GYRO_MAF_NR];
+float gz_tmp[GYRO_MAF_NR];
 int accx_tmp = 0;
 int accy_tmp = 0;
 int accz_tmp = 0;
 
 unsigned long tPrevMillis = millis();
 unsigned long tPrevMicros = micros();
+
+void SensorInit() {
+  for (int i = 0; i < GYRO_MAF_NR; i++) {
+    gx_tmp[i] = 0.0;
+    gy_tmp[i] = 0.0;
+    gz_tmp[i] = 0.0;
+  }
+}
 
 void updateSensorVals() {
   if ((micros()-tPrevMicros) > 1300) { // only update once per 1300us (~800 Hz)
@@ -46,9 +54,9 @@ void updateGyro() {
     gy_tmp[i] = gy_tmp[i+1];
     gz_tmp[i] = gz_tmp[i+1];
   }
-  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]-GYRO_X_OFFSET);
-  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[1]-GYRO_Y_OFFSET);
-  gz_tmp[GYRO_MAF_NR-1] = (float)(buffer[2]-GYRO_Z_OFFSET);
+  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]+GYRO_X_OFFSET);
+  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[1]+GYRO_Y_OFFSET);
+  gz_tmp[GYRO_MAF_NR-1] = (float)(buffer[2]+GYRO_Z_OFFSET);
   gyroMAF();
 }
 

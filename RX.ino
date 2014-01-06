@@ -2,6 +2,7 @@ PROGMEM const byte rxPins[6] = {
   RX_PIN_PITCH, RX_PIN_THROTTLE, RX_PIN_ROLL, RX_PIN_AUX1, RX_PIN_AUX2, RX_PIN_YAW};
 volatile byte rxState[4] = {0, 0, 0, 0};
 volatile int rxPrev[4] = {0, 0, 0, 0};
+volatile int rxPrevVal0=LKNOB_WMIN+10, rxPrevVal1=YAW_WMIN+10;
 
 void rxInit() {
   for(byte i=0;i<6;i++){
@@ -21,7 +22,7 @@ void rxGoesHigh0(){
 }
 void rxGoesLow0(){
   attachInterrupt(RX_INT_AUX2,rxGoesHigh0,RISING);
-  rxVal[4]=micros()-rxPrev[4];  
+  rxVal[4]=micros()-rxPrev[4];
 }
 
 void rxGoesHigh1(){
@@ -30,7 +31,7 @@ void rxGoesHigh1(){
 }
 void rxGoesLow1(){
   attachInterrupt(RX_INT_YAW,rxGoesHigh1,RISING);
-  rxVal[5]=micros()-rxPrev[5];  
+  rxVal[5]=micros()-rxPrev[5];
 }
 
 ISR(PCINT0_vect) 

@@ -4,13 +4,13 @@ void FlightControl() {
   if(rxVal[1]<1100)
     motorArm();
 #endif
-
-  if (rxVal[4]<1500) {
+  if (rxVal[3]<1500) {
     rateAngleSwitch = 0;
     ledStatus(0);
   } else {
     rateAngleSwitch = 1;
     ledStatus(1);
+    digitalWrite(LED13,HIGH);
     PIDAngleX.resetI();
     PIDAngleY.resetI();
   }
@@ -50,11 +50,12 @@ void FlightControl() {
       setY=map(rxVal[0],1520,PITCH_RMAX,0,PITCH_WMIN*RX_RATE_SENSITIVITY);
   }
 
-  if((rxVal[2]>1480) & (rxVal[2]<1520)) setX=0.0;
-  if((rxVal[0]>1480) & (rxVal[0]<1520)) setY=0.0;
-  if((rxVal[5]>1480) & (rxVal[5]<1520)) setZ=0.0;
+  if((rxVal[2]>1480) && (rxVal[2]<1520)) setX=0.0;
+  if((rxVal[0]>1480) && (rxVal[0]<1520)) setY=0.0;
+  if((rxVal[5]>1480) && (rxVal[5]<1520)) setZ=0.0;
 #else
   setZ=map(rxVal[5],YAW_RMIN,YAW_RMAX,YAW_WMAX,YAW_WMIN);
+  if(setZ > YAW_WMAX || setZ < YAW_WMIN) setZ = gz_avg;
   if (rateAngleSwitch == 0){
     setX=map(rxVal[2],ROLL_RMIN,ROLL_RMAX,ROLL_WMIN,ROLL_WMAX);
     setY=map(rxVal[0],PITCH_RMIN,PITCH_RMAX,PITCH_WMAX,PITCH_WMIN);
@@ -80,9 +81,9 @@ void FlightControl() {
   }
   
 #ifdef DEBUG_MOTOR
-  Serial.print("Throttle:");
-  Serial.print(throttle);
-  Serial.print('\t');
+  //Serial.print("Throttle:");
+  //Serial.print(throttle);
+  //Serial.print('\t');
   Serial.print("PIDroll:");
   Serial.print(PIDroll_val);
   Serial.print('\t');

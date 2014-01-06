@@ -26,7 +26,7 @@ byte rateAngleSwitch = 0;
 void setup() {
 #ifdef DEBUG
   Serial.begin(115200);
-  while(!Serial);
+  //while(!Serial);
   Serial.println("init");
 #endif
   MPU.init();
@@ -41,6 +41,8 @@ void setup() {
   Serial.println("motorarm");
   PIDInit();
   Serial.println("pid");
+  SensorInit();
+  Serial.println("sensors");
   tPrev = millis();
 }
 

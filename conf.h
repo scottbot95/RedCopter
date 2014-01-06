@@ -7,31 +7,34 @@
 //-------PID Config----------
 
 #define ROLL_PID_KP  0.250
-#define ROLL_PID_KI  0.950
+//#define ROLL_PID_KI  0.950
+#define ROLL_PID_KI  0.0
 #define ROLL_PID_KD  0.011
 #define ROLL_PID_MIN  -50.0
 #define ROLL_PID_MAX  50.0
 
 #define PITCH_PID_KP  0.250
-#define PITCH_PID_KI  0.950
+//#define PITCH_PID_KI  0.950
+#define PITCH_PID_KI  0.0
 #define PITCH_PID_KD  0.011
 #define PITCH_PID_MIN  -50.0
 #define PITCH_PID_MAX  50.0
 
 #define YAW_PID_KP  0.680
-#define YAW_PID_KI  0.500
+//#define YAW_PID_KI  0.500
+#define YAW_PID_KI  0.0
 #define YAW_PID_KD  0.0001
 #define YAW_PID_MIN  -50.0
 #define YAW_PID_MAX  50.0
 
 #define ANGLEX_KP 5.0
-#define ANGLEX_KI 0.02
+#define ANGLEX_KI 0.0 // 0.02
 #define ANGLEX_KD -0.015
 #define ANGLEX_MIN -100.0
 #define ANGLEX_MAX 100.0
 
 #define ANGLEY_KP 5.0
-#define ANGLEY_KI 0.02
+#define ANGLEY_KI 0.00 //0.02
 #define ANGLEY_KD -0.015
 #define ANGLEY_MIN -100.0
 #define ANGLEY_MAX 100.0
@@ -39,23 +42,23 @@
 //---------------------------
 
 //.....RX Config............
-#define THROTTLE_RMIN  1130
-#define THROTTLE_RMAX  1800
-#define THROTTLE_WMIN  MOTOR_ARM_START
+#define THROTTLE_RMIN  1132
+#define THROTTLE_RMAX  1812
+#define THROTTLE_WMIN  MOTOR_ZERO_LEVEL
 #define THROTTLE_WMAX  MOTOR_MAX_LEVEL
 
-#define ROLL_RMIN  11104
-#define ROLL_RMAX  1896
+#define ROLL_RMIN  1103
+#define ROLL_RMAX  1890
 #define ROLL_WMIN  -15
 #define ROLL_WMAX  15
 
-#define PITCH_RMIN  1200
-#define PITCH_RMAX  1864
+#define PITCH_RMIN  1202
+#define PITCH_RMAX  1846
 #define PITCH_WMIN  -15
 #define PITCH_WMAX  15
 
-#define YAW_RMIN  1084
-#define YAW_RMAX  1844
+#define YAW_RMIN  1096
+#define YAW_RMAX  1852
 #define YAW_WMIN  -45
 #define YAW_WMAX  45
 
@@ -76,11 +79,12 @@
 
 //----Debug Config---------
 #define DEBUG
-#define DEBUG_ANGLES
+//#define DEBUG_ANGLES
 //#define DEBUG_GYRO
-//#define DEBUG_PID
-#define DEBUG_RX
+#define DEBUG_PID
+//#define DEBUG_RX
 //#define DEBUG_SERIAL_CHART
+
 #define DEBUG_MOTOR
 
 //-------------------------
@@ -91,15 +95,15 @@
 #define ACC_Y_OFFSET  7
 #define ACC_Z_OFFSET  -73
 
-#define GYRO_X_OFFSET  1.418431
-#define GYRO_Y_OFFSET  -1.05606
-#define GYRO_Z_OFFSET  -0.54401
+#define GYRO_X_OFFSET  -0.72
+#define GYRO_Y_OFFSET  -0.2
+#define GYRO_Z_OFFSET  -2.04
 
 
 #define SPLIT  0.99 //COMP-filter nr
 #define RadToDeg 180.0/PI 
 #define  ACC_HPF_NR  98  //high pass filter nr
-#define  GYRO_HPF_NR 0   //high pass filter nr
+#define  GYRO_HPF_NR 98   //high pass filter nr
 #define  GYRO_MAF_NR  2  //Moving average filter nr
 //*************************************
 

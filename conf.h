@@ -7,34 +7,34 @@
 //-------PID Config----------
 
 #define ROLL_PID_KP  0.250
-//#define ROLL_PID_KI  0.950
-#define ROLL_PID_KI  0.0
+#define ROLL_PID_KI  0.950
+//#define ROLL_PID_KI  0.0
 #define ROLL_PID_KD  0.011
 #define ROLL_PID_MIN  -50.0
 #define ROLL_PID_MAX  50.0
 
 #define PITCH_PID_KP  0.250
-//#define PITCH_PID_KI  0.950
-#define PITCH_PID_KI  0.0
+#define PITCH_PID_KI  0.950
+//#define PITCH_PID_KI  0.0
 #define PITCH_PID_KD  0.011
 #define PITCH_PID_MIN  -50.0
 #define PITCH_PID_MAX  50.0
 
 #define YAW_PID_KP  0.680
-//#define YAW_PID_KI  0.500
-#define YAW_PID_KI  0.0
+#define YAW_PID_KI  0.500
+//#define YAW_PID_KI  0.0
 #define YAW_PID_KD  0.0001
 #define YAW_PID_MIN  -50.0
 #define YAW_PID_MAX  50.0
 
 #define ANGLEX_KP 5.0
-#define ANGLEX_KI 0.0 // 0.02
+#define ANGLEX_KI 0.02 // 0.02
 #define ANGLEX_KD -0.015
 #define ANGLEX_MIN -100.0
 #define ANGLEX_MAX 100.0
 
 #define ANGLEY_KP 5.0
-#define ANGLEY_KI 0.00 //0.02
+#define ANGLEY_KI 0.02 //0.02
 #define ANGLEY_KD -0.015
 #define ANGLEY_MIN -100.0
 #define ANGLEY_MAX 100.0
@@ -80,11 +80,10 @@
 //----Debug Config---------
 #define DEBUG
 //#define DEBUG_ANGLES
-//#define DEBUG_GYRO
+#define DEBUG_GYRO
 #define DEBUG_PID
 //#define DEBUG_RX
 //#define DEBUG_SERIAL_CHART
-
 #define DEBUG_MOTOR
 
 //-------------------------
@@ -97,13 +96,13 @@
 
 #define GYRO_X_OFFSET  -0.72
 #define GYRO_Y_OFFSET  -0.2
-#define GYRO_Z_OFFSET  -2.04
+#define GYRO_Z_OFFSET  -2.355
 
 
 #define SPLIT  0.99 //COMP-filter nr
 #define RadToDeg 180.0/PI 
 #define  ACC_HPF_NR  98  //high pass filter nr
-#define  GYRO_HPF_NR 98   //high pass filter nr
+#define  GYRO_HPF_NR 90   //high pass filter nr
 #define  GYRO_MAF_NR  2  //Moving average filter nr
 //*************************************
 
@@ -116,10 +115,10 @@
 
 
 //Motor Pins
-#define MOTOR0  6
-#define MOTOR1  9
-#define MOTOR2  10
-#define MOTOR3  11
+#define MOTOR0  5
+#define MOTOR1  6
+#define MOTOR2  9
+#define MOTOR3  10
 
 
 //*************************************
@@ -140,4 +139,5 @@
 #define RX_INT_AUX2  4
 #define RX_INT_YAW 2
 //........................
+
 

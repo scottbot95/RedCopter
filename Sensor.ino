@@ -5,6 +5,8 @@ int accx_tmp = 0;
 int accy_tmp = 0;
 int accz_tmp = 0;
 
+#define SINE45  0.07071068
+
 unsigned long tPrevMillis = millis();
 unsigned long tPrevMicros = micros();
 
@@ -54,9 +56,12 @@ void updateGyro() {
     gy_tmp[i] = gy_tmp[i+1];
     gz_tmp[i] = gz_tmp[i+1];
   }
-  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]+GYRO_X_OFFSET);
-  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[1]+GYRO_Y_OFFSET);
-  gz_tmp[GYRO_MAF_NR-1] = (float)(buffer[2]+GYRO_Z_OFFSET);
+  buffer[0] += GYRO_X_OFFSET;
+  buffer[1] += GYRO_Y_OFFSET;
+  buffer[2] += GYRO_Z_OFFSET;
+  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]-buffer[1])*SINE45 + 0.03;
+  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]+buffer[1])*SINE45 - 0.01;
+  gz_tmp[GYRO_MAF_NR-1] = (float)(buffer[2]);
   gyroMAF();
 }
 
@@ -85,4 +90,5 @@ void gyroMAF() { // Moving average filter
   gz_avg=(GYRO_HPF_NR*gz_old+(100.0-GYRO_HPF_NR)*gz_avg)/100.0;
 #endif
 }
+
 

@@ -8,3 +8,8 @@ void PIDInit(){
 
 }
 
+void resetPID() {
+  PIDRoll.resetI();
+  PIDPitch.resetI();
+  PIDYaw.resetI();
+}

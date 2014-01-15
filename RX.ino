@@ -1,7 +1,7 @@
 PROGMEM const byte rxPins[6] = {
   RX_PIN_PITCH, RX_PIN_THROTTLE, RX_PIN_ROLL, RX_PIN_AUX1, RX_PIN_AUX2, RX_PIN_YAW};
 volatile byte rxState[4] = {0, 0, 0, 0};
-volatile int rxPrev[4] = {0, 0, 0, 0};
+volatile int rxPrev[6] = {0, 0, 0, 0, 0, 0};
 volatile int rxPrevVal0=LKNOB_WMIN+10, rxPrevVal1=YAW_WMIN+10;
 
 void rxInit() {
@@ -12,26 +12,23 @@ void rxInit() {
   PCICR |= (1 << PCIE0); 
   PCMSK0 |= (1 << PCINT1)|(1 << PCINT2)|(1 << PCINT3)|(1 << PCINT4); 
   sei();
-  attachInterrupt(RX_INT_AUX2,rxGoesHigh0,RISING);
-  attachInterrupt(RX_INT_YAW,rxGoesHigh1,RISING);
+  attachInterrupt(RX_INT_AUX2,rxGoesHigh0,CHANGE);
+  attachInterrupt(RX_INT_YAW,rxGoesHigh1,CHANGE);
 }
 
 void rxGoesHigh0(){
-  attachInterrupt(RX_INT_AUX2,rxGoesLow0,FALLING);
-  rxPrev[4]=micros();
+  if (digitalRead(rxPins[4])) {
+    rxPrev[4]=micros();
+  } else {
+    rxVal[4]=micros()-rxPrev[4];
+  }
 }
-void rxGoesLow0(){
-  attachInterrupt(RX_INT_AUX2,rxGoesHigh0,RISING);
-  rxVal[4]=micros()-rxPrev[4];
-}
-
 void rxGoesHigh1(){
-  attachInterrupt(RX_INT_YAW,rxGoesLow1,FALLING);
-  rxPrev[5]=micros();
-}
-void rxGoesLow1(){
-  attachInterrupt(RX_INT_YAW,rxGoesHigh1,RISING);
-  rxVal[5]=micros()-rxPrev[5];
+  if (digitalRead(rxPins[5])) {
+    rxPrev[5]=micros();
+  } else {
+    rxVal[5]=micros()-rxPrev[5];
+  }
 }
 
 ISR(PCINT0_vect) 
@@ -48,4 +45,5 @@ ISR(PCINT0_vect)
     }
   }
 }
+
 

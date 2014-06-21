@@ -81,10 +81,10 @@
 #define DEBUG
 //#define DEBUG_ANGLES
 #define DEBUG_GYRO
-#define DEBUG_PID
+//#define DEBUG_PID
 //#define DEBUG_RX
 //#define DEBUG_SERIAL_CHART
-#define DEBUG_MOTOR
+//#define DEBUG_MOTOR
 
 //-------------------------
 
@@ -94,16 +94,16 @@
 #define ACC_Y_OFFSET  7
 #define ACC_Z_OFFSET  -73
 
-#define GYRO_X_OFFSET  -0.72
-#define GYRO_Y_OFFSET  -0.2
-#define GYRO_Z_OFFSET  -2.355
+//#define GYRO_X_OFFSET  -0.72
+//#define GYRO_Y_OFFSET  -0.2
+//#define GYRO_Z_OFFSET  -2.355
 
 
 #define SPLIT  0.99 //COMP-filter nr
 #define RadToDeg 180.0/PI 
 #define  ACC_HPF_NR  98  //high pass filter nr
 #define  GYRO_HPF_NR 90   //high pass filter nr
-#define  GYRO_MAF_NR  2  //Moving average filter nr
+#define  GYRO_MAF_NR  16  //Moving average filter nr
 //*************************************
 
 //***********MOTOR CONFIG**************

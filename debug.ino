@@ -20,6 +20,15 @@
   if (!(gz_avg<0)) Serial.print(' ');
   Serial.print((float)(gz_avg));
   Serial.print('\t');
+  Serial.print("OffsetX:");
+  Serial.print(gyro_offsets[0]);
+  Serial.print('\t');
+  Serial.print("OffsetY:");
+  Serial.print(gyro_offsets[1]);
+  Serial.print('\t');
+  Serial.print("OffsetZ:");
+  Serial.print(gyro_offsets[2]);
+  Serial.print('\t');
 #endif
 #ifdef DEBUG_PID
   Serial.print("setX:");

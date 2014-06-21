@@ -17,9 +17,10 @@ void motorArm(){
   analogWrite(MOTOR3,MOTOR_ZERO_LEVEL);
 #ifdef SAFE
   // block until throttle down
-  while((rxVal[1]>THROTTLE_RMIN+50)||rxVal[1]<1100){
+  while((rxVal[1]>THROTTLE_RMIN+50)||rxVal[1]<500){
 #ifdef DEBUG
-    Serial.println("Waiting for throttle down."); 
+    Serial.print("Waiting for throttle down. Throttle:"); 
+    Serial.println(rxVal[1]);
 #endif
   }
   PIDRoll.resetI();

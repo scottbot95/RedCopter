@@ -1,3 +1,5 @@
+#include <MPULib.h>
+
 #include "conf.h"
 #include <MPULib.h>
 #include <Wire.h>
@@ -25,7 +27,7 @@ byte rateAngleSwitch = 0;
 
 void setup() {
 #ifdef DEBUG
-  Serial.begin(115200);
+  Serial.begin(19200);
   //while(!Serial);
   Serial.println("init");
 #endif

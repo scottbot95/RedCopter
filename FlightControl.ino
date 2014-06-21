@@ -1,4 +1,12 @@
+#define SINE45  0.7071068
+
+
 void FlightControl() {
+  float tmpgx = gx_avg;
+  float tmpgy = gy_avg;
+  
+  gx_avg = (gx_avg - gy_avg) * SINE45;
+  gy_avg = (gx_avg + gy_avg) * SINE45;
 
 #ifdef SAFE
   if(rxVal[1]<1100)
@@ -17,6 +25,8 @@ void FlightControl() {
     PIDAngleX.resetI();
     PIDAngleY.resetI();
   }
+  
+  
   
   throttle = map(rxVal[1],THROTTLE_RMIN,THROTTLE_RMAX,THROTTLE_WMIN,THROTTLE_WMAX);
   int m0_val,m1_val,m2_val,m3_val,PIDroll_val,PIDpitch_val,PIDyaw_val;
@@ -115,6 +125,9 @@ void FlightControl() {
   analogWrite(MOTOR1,m1_val);
   analogWrite(MOTOR2,m2_val);
   analogWrite(MOTOR3,m3_val);
+  
+  gx_avg = tmpgx;
+  gy_avg = tmpgy;
 }
 
 

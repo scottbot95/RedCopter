@@ -4,13 +4,14 @@ float gz_tmp[GYRO_MAF_NR];
 int accx_tmp = 0;
 int accy_tmp = 0;
 int accz_tmp = 0;
-
-#define SINE45  0.07071068
+float gyro_offsets[3];
 
 unsigned long tPrevMillis = millis();
 unsigned long tPrevMicros = micros();
+unsigned long _startTime = millis();
 
 void SensorInit() {
+  _startTime = millis();
   for (int i = 0; i < GYRO_MAF_NR; i++) {
     gx_tmp[i] = 0.0;
     gy_tmp[i] = 0.0;
@@ -26,6 +27,13 @@ void updateSensorVals() {
   if ((millis()-tPrevMillis) > 20) { // only update once per 20ms (50 Hz)
     updateAcc();
     tPrevMillis = millis();
+  }
+  if(_startTime && (millis()-_startTime) > 1000)
+  {
+    gyro_offsets[0] = gx_avg;
+    gyro_offsets[1] = gy_avg;
+    gyro_offsets[2] = gz_avg;
+    _startTime = 0;
   }
   
   unsigned long t = millis();
@@ -56,11 +64,13 @@ void updateGyro() {
     gy_tmp[i] = gy_tmp[i+1];
     gz_tmp[i] = gz_tmp[i+1];
   }
-  buffer[0] += GYRO_X_OFFSET;
-  buffer[1] += GYRO_Y_OFFSET;
-  buffer[2] += GYRO_Z_OFFSET;
-  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]-buffer[1])*SINE45 + 0.03;
-  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]+buffer[1])*SINE45 - 0.01;
+  buffer[0] -= gyro_offsets[0];
+  buffer[1] -= gyro_offsets[1];
+  buffer[2] -= gyro_offsets[2];
+//  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]-buffer[1])*SINE45; // because it's not quite at a 45
+//  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]+buffer[1])*SINE45;
+  gx_tmp[GYRO_MAF_NR-1] = (float)(buffer[0]);
+  gy_tmp[GYRO_MAF_NR-1] = (float)(buffer[1]);
   gz_tmp[GYRO_MAF_NR-1] = (float)(buffer[2]);
   gyroMAF();
 }
@@ -83,6 +93,9 @@ void gyroMAF() { // Moving average filter
   gx_avg=(float)gx_avg/GYRO_MAF_NR;
   gy_avg=(float)gy_avg/GYRO_MAF_NR;
   gz_avg=(float)gz_avg/GYRO_MAF_NR;
+
+  //gx_avg = (gx_avg - gy_avg) * SINE45;
+  //gy_avg = (gx_avg + gy_avg) * SINE45;
 
 #if GYRO_HPF_NR > 0
   gx_avg=(GYRO_HPF_NR*gx_old+(100.0-GYRO_HPF_NR)*gx_avg)/100.0;

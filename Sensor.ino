@@ -41,7 +41,7 @@ void updateSensorVals() {
   float accx = atan2(accx_tmp, accz_tmp)*RadToDeg;
   float accy = atan2(accy_tmp, accz_tmp)*RadToDeg;
   angles[0] = SPLIT*(-gy_avg*dt + angles[0]) + (1.0-SPLIT)*accx;
-  angles[0] = SPLIT*(gx_avg*dt + angles[1]) + (1.0-SPLIT)*accy;
+  angles[1] = SPLIT*(gx_avg*dt + angles[1]) + (1.0-SPLIT)*accy;
   tPrev = t;
 }
 

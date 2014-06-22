@@ -5,8 +5,8 @@ void FlightControl() {
   float tmpgx = gx_avg;
   float tmpgy = gy_avg;
   
-  gx_avg = (gx_avg - gy_avg) * SINE45;
-  gy_avg = (gx_avg + gy_avg) * SINE45;
+  gx_avg = (tmpgx - tmpgy) * SINE45;
+  gy_avg = (tmpgx + tmpgy) * SINE45;
 
 #ifdef SAFE
   if(rxVal[1]<1100)
